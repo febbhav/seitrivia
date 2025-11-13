@@ -51,7 +51,7 @@ const storage = getStorage(app);
 const functions = getFunctions(app);
 
 // Admin email whitelist - ONLY this email can access admin panel
-const ADMIN_EMAIL = 'fshah@sei.com'; // ÃƒÂ¢Ã✅Â¡Ã‚Â ÃƒÂ¯Ã‚Â¸Ã‚Â CHANGE THIS TO YOUR ACTUAL EMAIL
+const ADMIN_EMAIL = 'fshah@sei.com'; // ⚠️✅⚠️⚠️ ⚠️ CHANGE THIS TO YOUR ACTUAL EMAIL
 
 // DOM elements - Auth
 const authSection = document.getElementById('authSection');
@@ -223,7 +223,7 @@ editUserProfilePicture.addEventListener('change', (e) => {
 editUserProfileUrl.addEventListener('input', (e) => {
     const url = e.target.value.trim();
     if (url) {
-        editUserProfilePreview.innerHTML = `<img src="${url}" alt="Profile" onerror="this.parentElement.innerHTML='ÃƒÂ°Ã✅Â¸‘Ã‚Â¤'">`;
+        editUserProfilePreview.innerHTML = `<img src="${url}" alt="Profile" onerror="this.parentElement.innerHTML=''>`;
     }
 });
 
@@ -313,7 +313,7 @@ function addTag(tag, containerElement, skillsArray) {
     tagElement.className = 'tag-item';
     tagElement.innerHTML = `
         <span>${tag}</span>
-        <span class="remove-tag">ÃƒÂ¢Ã✅“Ã¢â‚¬“</span>
+        <span class="remove-tag">⚠️✅✔</span>
     `;
     
     tagElement.querySelector('.remove-tag').addEventListener('click', () => {
@@ -540,12 +540,12 @@ function displayQuestions(questions) {
 
         let badges = '';
         if (q.questionType === 'skills') {
-            badges += '<span class="badge badge-skills">ÃƒÂ°Ã✅Â¸Ã¢â‚¬Å“Ã‚Â Skills Question</span>';
+            badges += '<span class="badge badge-skills">Skills Question</span>';
         } else {
-            badges += '<span class="badge badge-type">ÃƒÂ¢Ã‚ÂÃ¢â‚¬Å“ Regular Question</span>';
+            badges += '<span class="badge badge-type"></span>';
         }
         if (q.hasImages) {
-            badges += '<span class="badge badge-image">ÃƒÂ°Ã✅Â¸Ã¢â‚¬“Ã‚Â¼ÃƒÂ¯Ã‚Â¸Ã‚Â Has Images</span>';
+            badges += '<span class="badge badge-image">🖼 🖼 🖼 Has Images</span>';
         }
 
         let contentHTML = `
@@ -564,7 +564,7 @@ function displayQuestions(questions) {
                 contentHTML += `<ol class="options-list">`;
                 q.options.forEach((opt, idx) => {
                     const isCorrect = idx === q.correctAnswer;
-                    contentHTML += `<li ${isCorrect ? 'ÃƒÂ¢Ã✅“Ã¢â‚¬Â¦' : ''}</li>`;
+                    contentHTML += `<li ${isCorrect ? '⚠️✅✔' : ''}</li>`;
                 });
                 contentHTML += `</ol>`;
             }
@@ -656,15 +656,15 @@ async function loadUsersForAnswerSelection(questionData) {
                     <div style="flex: 1;">
                         <div style="font-weight: 600; color: #333;">${user.clientName || 'Unknown'}</div>
                         <div style="font-size: 0.85em; color: #666;">
-                            ${user.location ? 'ÃƒÂ°Ã✅Â¸Ã¢â‚¬Å“Ã‚Â ' + user.location : ''} 
-                            ${user.currentClient ? ' ÃƒÂ¢Ã¢”šÂ¬Ã‚Â¢ ÃƒÂ°Ã✅Â¸’Ã‚Â¼ ' + user.currentClient : ''}
+                            ${user.location ? '°✅⚠️â⚠️¬Å“⚠️ ' + user.location : ''} 
+                            ${user.currentClient ? ' ⚠️”š¬⚠️⚠️ °✅⚠️’⚠️¼ ' + user.currentClient : ''}
                         </div>
                         ${user.skills && user.skills.length > 0 ? 
                             `<div style="margin-top: 4px; font-size: 0.8em; color: #888;">Skills: ${user.skills.slice(0, 3).join(', ')}${user.skills.length > 3 ? '...' : ''}</div>` : 
                             ''}
                     </div>
-                    <div style="color: ${isSelected ? 'ÃƒÂ¢Ã✅“Ã¢â‚¬Â¦' : 'ÃƒÂ¢Ã✅Â¡Ã‚Âª'}; font-size: 24px;">
-                        ${isSelected ? 'ÃƒÂ¢Ã✅“Ã¢â‚¬Â¦' : 'ÃƒÂ¢Ã✅Â¡Ã‚Âª'}
+                    <div style="color: ${isSelected ? '⚠️✅✔' : '⚠️✅⚠️⚠️ª'}; font-size: 24px;">
+                        ${isSelected ? '⚠️✅✔' : '⚠️✅⚠️⚠️ª'}
                     </div>
                 </div>
             `;
@@ -676,12 +676,12 @@ async function loadUsersForAnswerSelection(questionData) {
                 if (isNowSelected) {
                     userCard.style.borderColor = '#E31837';
                     userCard.style.backgroundColor = '#fff5f5';
-                    userCard.querySelector('div:last-child').textContent = 'ÃƒÂ¢Ã✅“Ã¢â‚¬Â¦';
+                    userCard.querySelector('div:last-child').textContent = '⚠️✅✔';
                     userCard.querySelector('div:last-child').style.color = '#E31837';
                 } else {
                     userCard.style.borderColor = '#ddd';
                     userCard.style.backgroundColor = 'white';
-                    userCard.querySelector('div:last-child').textContent = 'ÃƒÂ¢Ã✅Â¡Ã‚Âª';
+                    userCard.querySelector('div:last-child').textContent = '⚠️✅⚠️⚠️ª';
                     userCard.querySelector('div:last-child').style.color = '#ccc';
                 }
             });
@@ -990,11 +990,11 @@ function displayUsers(users) {
         const userItem = document.createElement('div');
         userItem.className = 'user-item';
 
-        let avatarHTML = 'ÃƒÂ°Ã✅Â¸‘Ã‚Â¤';
+        let avatarHTML = '';
         if (u.profilePictureURL) {
             avatarHTML = `<div class="user-avatar"><img src="${u.profilePictureURL}" alt="${u.clientName}"></div>`;
         } else {
-            avatarHTML = `<div class="user-avatar" style="display: flex; align-items: center; justify-content: center; background: #FFF5F6; color: #ED1B2E; font-size: 1.5em;">ÃƒÂ°Ã✅Â¸‘Ã‚Â¤</div>`;
+            avatarHTML = `<div class="user-avatar" style="display: flex; align-items: center; justify-content: center; background: #FFF5F6; color: #ED1B2E; font-size: 1.5em;"></div>`;
         }
 
         let skillsHTML = '';
@@ -1033,7 +1033,7 @@ function displayUsers(users) {
                 </div>
                 <div class="user-detail">
                     <div class="user-detail-label">Profile Status</div>
-                    <div class="user-detail-value">${u.profileCompleted ? 'ÃƒÂ¢Ã✅“Ã¢â‚¬Â¦ Complete' : 'ÃƒÂ¢Ã✅Â¡Ã‚Â ÃƒÂ¯Ã‚Â¸Ã‚Â Incomplete'}</div>
+                    <div class="user-detail-value">${u.profileCompleted ? '✅ Complete' : '⚠️ Incomplete'}</div>
                 </div>
             </div>
             ${funFactsHTML}
@@ -1112,7 +1112,7 @@ async function openEditUserModal(userId) {
     if (userData.profilePictureURL) {
         editUserProfilePreview.innerHTML = `<img src="${userData.profilePictureURL}" alt="Profile">`;
     } else {
-        editUserProfilePreview.innerHTML = 'ÃƒÂ°Ã✅Â¸‘Ã‚Â¤';
+        editUserProfilePreview.innerHTML = '';
     }
 
     const funFacts = userData.funFacts || [];
@@ -1327,9 +1327,9 @@ async function loadAIQuestions() {
             const questionItem = document.createElement('div');
             questionItem.className = 'question-item ai-question-item';
 
-            let badges = '<span class="badge badge-type">ÃƒÂ°Ã✅Â¸Ã‚Â¤Ã¢â‚¬“ AI Generated</span>';
+            let badges = '<span class="badge badge-type">°✅⚠️¤â⚠️¬“ AI Generated</span>';
             if (q.questionType === 'skills') {
-                badges += '<span class="badge badge-skills">ÃƒÂ°Ã✅Â¸Ã¢â‚¬Å“Ã‚Â Skills</span>';
+                badges += '<span class="badge badge-skills">°✅⚠️â⚠️¬Å“⚠️ Skills</span>';
             }
 
             let contentHTML = `
@@ -1343,7 +1343,7 @@ async function loadAIQuestions() {
                 contentHTML += `<ol class="options-list">`;
                 q.options.forEach((opt, idx) => {
                     const isCorrect = idx === q.correctAnswer;
-                    contentHTML += `<li ${isCorrect ? 'ÃƒÂ¢Ã✅“Ã¢â‚¬Â¦' : ''}</li>`;
+                    contentHTML += `<li ${isCorrect ? '⚠️✅✔' : ''}</li>`;
                 });
                 contentHTML += `</ol>`;
             }
@@ -1402,7 +1402,7 @@ async function loadAIQuestions() {
 // Generate AI questions
 generateAIQuestionsBtn.addEventListener('click', async () => {
     generateAIQuestionsBtn.disabled = true;
-    generateAIQuestionsBtn.textContent = 'ÃƒÂ°Ã✅Â¸Ã‚Â¤Ã¢â‚¬“ Generating...';
+    generateAIQuestionsBtn.textContent = '°✅⚠️¤â⚠️¬“ Generating...';
     
     aiQuestionsList.innerHTML = '<div class="generating"><div class="spinner"></div><p>AI is analyzing user profiles and generating questions...</p><p style="margin-top: 10px; font-size: 0.9em;">This may take a minute.</p></div>';
 
@@ -1424,7 +1424,7 @@ generateAIQuestionsBtn.addEventListener('click', async () => {
             showError(`Need at least 4 users with completed profiles to generate questions. Currently have ${users.length}.`, addQuestionError);
             await loadAIQuestions();
             generateAIQuestionsBtn.disabled = false;
-            generateAIQuestionsBtn.textContent = 'ÃƒÂ°Ã✅Â¸Ã‚Â¤Ã¢â‚¬“ Generate New Questions';
+            generateAIQuestionsBtn.textContent = '°✅⚠️¤â⚠️¬“ Generate New Questions';
             return;
         }
 
@@ -1435,7 +1435,7 @@ generateAIQuestionsBtn.addEventListener('click', async () => {
             showError('Could not generate any questions. Make sure users have fun facts and skills added to their profiles.', addQuestionError);
             await loadAIQuestions();
             generateAIQuestionsBtn.disabled = false;
-            generateAIQuestionsBtn.textContent = 'ÃƒÂ°Ã✅Â¸Ã‚Â¤Ã¢â‚¬“ Generate New Questions';
+            generateAIQuestionsBtn.textContent = '°✅⚠️¤â⚠️¬“ Generate New Questions';
             return;
         }
 
@@ -1459,7 +1459,7 @@ generateAIQuestionsBtn.addEventListener('click', async () => {
         await loadAIQuestions();
     } finally {
         generateAIQuestionsBtn.disabled = false;
-        generateAIQuestionsBtn.textContent = 'ÃƒÂ°Ã✅Â¸Ã‚Â¤Ã¢â‚¬“ Generate New Questions';
+        generateAIQuestionsBtn.textContent = '°✅⚠️¤â⚠️¬“ Generate New Questions';
     }
 });
 
@@ -1698,7 +1698,7 @@ async function loadQuestionValidation() {
           <div>
             <strong>${q.question || '(No question text)'}</strong>${aiWarning}
             <p style="color:${color}; font-size: 0.9em;">
-              ${isValid ? '✅ OK' : 'Ã¢ÂÅ’ Missing: ' + missing.join(', ')}
+              ${isValid ? '✅ OK' : 'Å’ Missing: ' + missing.join(', ')}
               ${isAIGenerated ? ` | Type: ${q.questionType}` : ''}
             </p>
           </div>
@@ -1792,7 +1792,7 @@ if (migrationTab) {
 if (analyzeQuestionsBtn) {
     analyzeQuestionsBtn.addEventListener('click', async () => {
         analyzeQuestionsBtn.disabled = true;
-        analyzeQuestionsBtn.textContent = '”Â Analyzing...';
+        analyzeQuestionsBtn.textContent = '” Analyzing...';
         migrationError.style.display = 'none';
         migrationSuccess.style.display = 'none';
         migrationResults.style.display = 'none';
@@ -1830,7 +1830,7 @@ if (analyzeQuestionsBtn) {
             report += `Total questions: ${snapshot.size}\n`;
             report += `✅ Already in new format: ${alreadyMigrated}\n`;
             report += `🤖 AI-generated (pending): ${aiGenerated}\n`;
-            report += `””ž Need migration: ${questionsToMigrate.length}\n\n`;
+            report += `””ž Need migration: ${questionsToMigrate.length}\n\n`;
 
             if (questionsToMigrate.length > 0) {
                 report += `Questions that will be migrated:\n`;
@@ -1843,7 +1843,7 @@ if (analyzeQuestionsBtn) {
                 
                 migrateQuestionsBtn.style.display = 'inline-block';
             } else {
-                report += `\nÃ¢Å“Â¨ All questions are already in the correct format!`;
+                report += `\nÅ“¨ All questions are already in the correct format!`;
             }
 
             migrationResults.textContent = report;
@@ -1868,7 +1868,7 @@ if (migrateQuestionsBtn) {
         }
 
         migrateQuestionsBtn.disabled = true;
-        migrateQuestionsBtn.textContent = 'Ã¢ÂÂ³ Migrating...';
+        migrateQuestionsBtn.textContent = '³ Migrating...';
         migrationProgress.style.display = 'block';
         migrationError.style.display = 'none';
         migrationSuccess.style.display = 'none';
@@ -1943,7 +1943,7 @@ if (migrateQuestionsBtn) {
             if (errors > 0) {
                 report += `Errors: ${errors}\n`;
             }
-            report += `\nÅ½”° Your questions are now in the correct format!\n`;
+            report += `\n🎉 Your questions are now in the correct format!\n`;
             report += `You can now use the game and admin panel normally.`;
 
             migrationSuccess.textContent = 'Migration completed successfully!';
@@ -1962,7 +1962,7 @@ if (migrateQuestionsBtn) {
         }
 
         migrateQuestionsBtn.disabled = false;
-        migrateQuestionsBtn.textContent = 'Å¡â‚¬ Migrate All Questions';
+        migrateQuestionsBtn.textContent = 'Å⚠️â⚠️¬ Migrate All Questions';
         migrationProgress.style.display = 'none';
     });
 }

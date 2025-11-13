@@ -377,7 +377,7 @@ if (loginBtn) {
             showAlert(errorMessage, authError);
         } finally {
             loginBtn.disabled = false;
-            loginBtn.innerHTML = '<span>Login</span><span class="btn-arrow">Ã¢” ’</span>';
+            loginBtn.innerHTML = '<span>Login</span><span class="btn-arrow">” ’</span>';
         }
     });
 }
@@ -447,7 +447,7 @@ if (signupBtn) {
             showAlert(errorMessage, signupError);
         } finally {
             signupBtn.disabled = false;
-            signupBtn.innerHTML = '<span>Create Account</span><span class="btn-arrow">Ã¢” ’</span>';
+            signupBtn.innerHTML = '<span>Create Account</span><span class="btn-arrow">” ’</span>';
         }
     });
 }
@@ -486,7 +486,7 @@ if (resetPasswordBtn) {
             showAlert(errorMessage, resetError);
         } finally {
             resetPasswordBtn.disabled = false;
-            resetPasswordBtn.innerHTML = '<span>Send Reset Link</span><span class="btn-arrow">Ã¢” ’</span>';
+            resetPasswordBtn.innerHTML = '<span>Send Reset Link</span><span class="btn-arrow">” ’</span>';
         }
     });
 }
@@ -711,7 +711,7 @@ if (modalProfileSkills) {
             const customOption = document.createElement('div');
             customOption.className = 'tag-option';
             customOption.style.cssText = 'background:#F3F4F6;border-top:1px solid #E5E7EB;font-weight:600;color:#ED1B2E;';
-            customOption.innerHTML = `Ã¢Å¾”¢ Add "${modalProfileSkills.value.trim()}" as custom skill`;
+            customOption.innerHTML = `➕ Add "${modalProfileSkills.value.trim()}" as custom skill`;
             customOption.addEventListener('click', () => {
                 addModalSkillTag(modalProfileSkills.value.trim());
                 modalProfileSkills.value = '';
@@ -861,7 +861,7 @@ async function loadNextQuestion() {
     });
     
     if (validQuestions.length === 0) {
-        if (questionText) questionText.textContent = 'Å½”° Congratulations! You\'ve answered all available questions!';
+        if (questionText) questionText.textContent = '🎉 Congratulations! You\'ve answered all available questions!';
         if (optionsContainer) optionsContainer.innerHTML = '<p style="text-align:center;color:#9CA3AF;margin-top:2rem;">No more questions available. Check back later for new questions!</p>';
         if (submitAnswerBtn) submitAnswerBtn.style.display = 'none';
         return;
@@ -911,7 +911,7 @@ async function renderOptions() {
     
     // Only render if answerOptions exists and is valid
     if (!currentQuestion.answerOptions || !Array.isArray(currentQuestion.answerOptions) || currentQuestion.answerOptions.length === 0) {
-        optionsContainer.innerHTML = '<p style="color:#EF4444;text-align:center;padding:2rem;">⚠️This question needs to be fixed in the admin panel.</p>';
+        optionsContainer.innerHTML = '<p style="color:#EF4444;text-align:center;padding:2rem;">⚠️ This question needs to be fixed in the admin panel.</p>';
         console.error('Question missing valid answerOptions:', currentQuestion);
         return;
     }
@@ -943,7 +943,7 @@ async function renderOptions() {
                     const userInfo = document.createElement('div');
                     userInfo.className = 'option-user-info';
                     userInfo.innerHTML = `
-                        ${userPhoto ? `<img src="${userPhoto}" class="option-user-avatar" alt="${userData.clientName || userData.displayName}">` : '<div class="option-user-avatar">‘Â¤</div>'}
+                        ${userPhoto ? `<img src="${userPhoto}" class="option-user-avatar" alt="${userData.clientName || userData.displayName}">` : '<div class="option-user-avatar">🙂</div>'}
                         <div class="option-user-details">
                             <div class="option-user-name">${userData.clientName || userData.displayName || 'Unknown'}</div>
                             <div class="option-user-location">${userData.location || 'Unknown Location'}</div>
@@ -1026,7 +1026,7 @@ if (submitAnswerBtn) {
                 // Add X mark
                 const checkbox = opt.querySelector('.option-checkbox');
                 if (checkbox) {
-                    checkbox.innerHTML = 'Ã¢Å“—';
+                    checkbox.innerHTML = '✗';
                     checkbox.style.background = '#EF4444';
                     checkbox.style.color = 'white';
                     checkbox.style.border = 'none';
@@ -1078,7 +1078,7 @@ if (submitAnswerBtn) {
             answerFeedback.style.display = 'block';
             
             if (feedbackIcon) {
-                feedbackIcon.textContent = pointsEarned > 0 ? '✓' : 'Ã¢Å“—';
+                feedbackIcon.textContent = pointsEarned > 0 ? '✓' : '✗';
                 feedbackIcon.className = pointsEarned > 0 ? 'feedback-icon correct' : 'feedback-icon incorrect';
             }
             
@@ -1111,7 +1111,7 @@ if (submitAnswerBtn) {
             let countdown = 3;
             
             const countdownInterval = setInterval(() => {
-                nextQuestionBtn.innerHTML = `<span>Next Question (${countdown}s)</span><span class="btn-arrow">Ã¢” ’</span>`;
+                nextQuestionBtn.innerHTML = `<span>Next Question (${countdown}s)</span><span class="btn-arrow">” ’</span>`;
                 countdown--;
                 
                 if (countdown < 0) {
@@ -1223,7 +1223,7 @@ function renderBrowseTable(users) {
         if (userPhoto) {
             avatarCell.innerHTML = `<img src="${userPhoto}" class="table-avatar" alt="${user.clientName || user.displayName}" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">`;
         } else {
-            avatarCell.innerHTML = '<div class="table-avatar" style="display:flex;align-items:center;justify-content:center;background:#7B2D87;color:white;width:48px;height:48px;border-radius:50%;">‘Â¤</div>';
+            avatarCell.innerHTML = '<div class="table-avatar" style="display:flex;align-items:center;justify-content:center;background:#7B2D87;color:white;width:48px;height:48px;border-radius:50%;">🙂</div>';
         }
         row.appendChild(avatarCell);
         
@@ -1282,7 +1282,7 @@ function showUserProfileModal(user) {
                 <div style="background:linear-gradient(135deg, #ED1B2E 0%, #7B2D87 100%);padding:3rem 2rem 8rem 2rem;border-radius:16px 16px 0 0;position:relative;">
                     <div style="position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);">
                         <div id="modalUserAvatar" style="width:120px;height:120px;border-radius:50%;border:5px solid white;box-shadow:0 4px 6px rgba(0,0,0,0.1);overflow:hidden;background:#7B2D87;display:flex;align-items:center;justify-content:center;color:white;font-size:48px;">
-                            ‘Â¤
+                            🙂
                         </div>
                     </div>
                 </div>
@@ -1295,11 +1295,11 @@ function showUserProfileModal(user) {
                     <!-- Info Grid -->
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem;text-align:left;">
                         <div style="background:#F9FAFB;padding:1rem;border-radius:8px;">
-                            <div style="color:#6B7280;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.5rem;">“Â Location</div>
+                            <div style="color:#6B7280;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.5rem;">📍 Location</div>
                             <div id="modalUserLocation" style="color:#1F2937;font-size:16px;font-weight:600;"></div>
                         </div>
                         <div style="background:#F9FAFB;padding:1rem;border-radius:8px;">
-                            <div style="color:#6B7280;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.5rem;">’Â¼ Current Client</div>
+                            <div style="color:#6B7280;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.5rem;">🏢 Current Client</div>
                             <div id="modalUserClient" style="color:#1F2937;font-size:16px;font-weight:600;"></div>
                         </div>
                     </div>
@@ -1343,7 +1343,7 @@ function showUserProfileModal(user) {
     if (userPhoto) {
         avatarDiv.innerHTML = `<img src="${userPhoto}" alt="${userName}" style="width:100%;height:100%;object-fit:cover;">`;
     } else {
-        avatarDiv.innerHTML = '‘Â¤';
+        avatarDiv.innerHTML = '🙂';
         avatarDiv.style.fontSize = '48px';
     }
     
@@ -1437,7 +1437,7 @@ function renderLeaderboard(users) {
             <div class="leaderboard-rank">${index + 1}</div>
             ${userPhoto ? 
                 `<img src="${userPhoto}" class="leaderboard-avatar" alt="${user.clientName || user.displayName}">` :
-                '<div class="leaderboard-avatar" style="display:flex;align-items:center;justify-content:center;background:#7B2D87;color:white;width:48px;height:48px;border-radius:50%;">‘Â¤</div>'
+                '<div class="leaderboard-avatar" style="display:flex;align-items:center;justify-content:center;background:#7B2D87;color:white;width:48px;height:48px;border-radius:50%;">🙂</div>'
             }
             <div class="leaderboard-info">
                 <div class="leaderboard-name">${user.clientName || user.displayName || 'Unknown'}</div>
@@ -1588,7 +1588,7 @@ if (profileSkills) {
             const customOption = document.createElement('div');
             customOption.className = 'tag-option';
             customOption.style.cssText = 'background:#F3F4F6;border-top:1px solid #E5E7EB;font-weight:600;color:#ED1B2E;';
-            customOption.innerHTML = `Ã¢Å¾”¢ Add "${profileSkills.value.trim()}" as custom skill`;
+            customOption.innerHTML = `➕ Add "${profileSkills.value.trim()}" as custom skill`;
             customOption.addEventListener('click', () => {
                 addSkillTag(profileSkills.value.trim());
                 profileSkills.value = '';
@@ -1726,7 +1726,7 @@ if (profileForm) {
             
             if (submitBtn) {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = '<span>Save Profile</span><span class="btn-arrow">Ã¢” ’</span>';
+                submitBtn.innerHTML = '<span>Save Profile</span><span class="btn-arrow">” ’</span>';
             }
         } catch (error) {
             console.error('Error updating profile:', error);
@@ -1735,7 +1735,7 @@ if (profileForm) {
             const submitBtn = profileForm.querySelector('button[type="submit"]');
             if (submitBtn) {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = '<span>Save Profile</span><span class="btn-arrow">Ã¢” ’</span>';
+                submitBtn.innerHTML = '<span>Save Profile</span><span class="btn-arrow">” ’</span>';
             }
         }
     });
