@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEI Team Trivia - Admin Panel</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin-styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Auth Section -->
+        <div class="auth-section active" id="authSection">
+            <div class="auth-card">
+                <div class="logo-container">
+                    <img src="logo.png" alt="SEI Logo" class="logo">
+                </div>
+                <h1>Admin Panel</h1>
+                <p>Administrator access only</p>
+
+                <div class="error-message" id="authError"></div>
+                <div class="success-message" id="authSuccess"></div>
+
+                <div class="input-group">
+                    <label for="emailInput">Email</label>
+                    <input type="email" id="emailInput" placeholder="admin@sei.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="passwordInput">Password</label>
+                    <input type="password" id="passwordInput" placeholder="Enter password" required>
+                </div>
+
+                <button class="btn" id="loginBtn">Login</button>
+                <button class="btn-link" id="forgotPasswordBtn">Forgot Password?</button>
+            </div>
+        </div>
+
+        <!-- Reset Password Section -->
+        <div class="reset-section" id="resetSection">
+            <div class="auth-card">
+                <div class="logo-container">
+                    <img src="logo.png" alt="SEI Logo" class="logo">
+                </div>
+                <h2>Send Reset Email</h2>
+                <p>Enter your email to receive a password reset link</p>
+
+                <div class="error-message" id="resetError"></div>
+                <div class="success-message" id="resetSuccess"></div>
+
+                <div class="input-group">
+                    <label for="resetEmail">Email</label>
+                    <input type="email" id="resetEmail" placeholder="admin@sei.com" required>
+                </div>
+
+                <button class="btn" id="sendResetBtn">Send Reset Link</button>
+                <button class="btn btn-secondary" id="backToLoginBtn">Back to Login</button>
+            </div>
+        </div>
+
+        <!-- Admin Section -->
+        <div class="admin-section" id="adminSection">
+            <!-- Header -->
+            <div class="admin-header">
+                <div class="header-left">
+                    <div class="logo-container">
+                        <img src="logo.png" alt="SEI Logo" class="logo">
+                    </div>
+                    <div class="header-info">
+                        <h1>Team Trivia</h1>
+                        <p class="admin-label">Admin Panel</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="admin-user">
+                        <span class="admin-icon">ÃƒÂ°Ã✅Â¸‘Ã‚Â¤</span>
+                        <span id="adminName">admin@sei.com</span>
+                    </div>
+                    <button class="btn" id="resetPasswordHeaderBtn" style="margin-right: 10px; background: #7B2D87;">”‘ Reset Password</button>
+                    <button class="btn btn-logout" id="logoutBtn">Logout</button>
+                </div>
+            </div>
+
+            <!-- Statistics Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">ÃƒÂ¢Ã‚ÂÃ¢â‚¬Å“</div>
+                    <div class="stat-info">
+                        <div class="stat-value" id="totalQuestions">0</div>
+                        <div class="stat-label">Total Questions</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">ÃƒÂ°Ã✅Â¸‘Ã‚Â¥</div>
+                    <div class="stat-info">
+                        <div class="stat-value" id="totalUsers">0</div>
+                        <div class="stat-label">Total Users</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" id="questionsTab">Questions</button>
+                <button class="tab" id="usersTab">Users</button>
+                <button class="tab" id="addQuestionTab">Add Question</button>
+                <button class="tab" id="aiQuestionsTab">AI Generated</button>
+                <button class="tab" id="validationTab">Validate Questions</button>
+                <button class="tab" id="migrationTab">Migration</button>
+            </div>
+
+            <!-- Questions View -->
+            <div class="tab-content active" id="questionsContent">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>All Questions</h2>
+                        <div class="search-box">
+                            <input type="text" id="questionSearch" placeholder="Search questions..." />
+                        </div>
+                    </div>
+                    <div id="questionsList" class="questions-list"></div>
+                </div>
+            </div>
+
+            <!-- Users View -->
+            <div class="tab-content" id="usersContent">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>All Users</h2>
+                        <div class="search-box">
+                            <input type="text" id="userSearch" placeholder="Search users..." />
+                        </div>
+                    </div>
+                    <div id="usersList" class="users-list"></div>
+                </div>
+            </div>
+
+            <!-- Add Question View -->
+            <div class="tab-content" id="addQuestionContent">
+                <div class="card">
+                    <h2>Add New Question</h2>
+                    <div class="error-message" id="addQuestionError"></div>
+                    <div class="success-message" id="addQuestionSuccess"></div>
+
+                    <div class="input-group">
+                        <label>Question Type</label>
+                        <select id="questionType">
+                            <option value="regular">Regular Question</option>
+                            <option value="skills">Skills-Based Question (Select all that apply)</option>
+                        </select>
+                    </div>
+
+                    <div id="regularQuestionForm">
+                        <div class="input-group">
+                            <label for="questionText">Question *</label>
+                            <textarea id="questionText" placeholder="Enter your question" rows="3" required></textarea>
+                        </div>
+
+                        <div class="input-group">
+                            <label>
+                                <input type="checkbox" id="hasQuestionImage">
+                                Include question image
+                            </label>
+                        </div>
+
+                        <div class="input-group" id="questionImageSection" style="display: none;">
+                            <label for="questionImageUrl">Question Image URL</label>
+                            <input type="url" id="questionImageUrl" placeholder="https://example.com/image.jpg">
+                        </div>
+
+                        <div class="input-group">
+                            <label>Options *</label>
+                            <div class="options-input" id="optionsInput">
+                                <!-- Options will be added here -->
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label>
+                                <input type="checkbox" id="hasOptionImages">
+                                Include images for options
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="skillsQuestionForm" style="display: none;">
+                        <div class="input-group">
+                            <label for="skillsQuestionText">Question *</label>
+                            <input type="text" id="skillsQuestionText" placeholder="Which consultants have [skill] expertise?" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="skillTagSelect">Skill Tag *</label>
+                            <select id="skillTagSelect">
+                                <option value="">Select a skill...</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="btn" id="addQuestionBtn">Add Question</button>
+                </div>
+            </div>
+
+            <!-- AI Generated Questions View -->
+            <div class="tab-content" id="aiQuestionsContent">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>AI Generated Questions</h2>
+                        <button class="btn btn-small" id="generateAIQuestionsBtn">ÃƒÂ°Ã✅Â¸Ã‚Â¤Ã¢â‚¬“ Generate New Questions</button>
+                    </div>
+                    <div class="info-box">
+                        <p><strong>How it works:</strong> AI analyzes user profiles (fun facts, skills) to generate personalized trivia questions about your team.</p>
+                    </div>
+                    <div id="aiQuestionsList" class="questions-list"></div>
+                </div>
+            </div>
+
+            <!-- Validation View -->
+            <div class="tab-content" id="validationContent">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Question Validation</h2>
+                        <button class="btn btn-small" id="autoFixQuestionsBtn">ÃƒÂ°Ã✅Â¸”Ã‚Â§ Auto-Fix Questions</button>
+                    </div>
+                    <div class="info-box">
+                        <p><strong>Auto-Fix:</strong> Automatically repairs questions with old formats (options + correctAnswer, answer + wrongAnswers). Questions that can't be auto-fixed will still need manual editing.</p>
+                    </div>
+                    <div class="error-message" id="validationError"></div>
+                    <div class="success-message" id="validationSuccess"></div>
+                    <p>These questions are missing required fields or answer options.</p>
+                    <div id="validationList" class="validation-list"></div>
+                </div>
+            </div>
+
+            <!-- Migration View -->
+            <div class="tab-content" id="migrationContent">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>””ž Question Format Migration</h2>
+                    </div>
+                    <div class="info-box" style="background: #fff3cd; border-color: #ffc107;">
+                        <p><strong>⚠️Important:</strong> This tool converts questions from the old format to the new format required by the updated game.</p>
+                        <p style="margin-top: 10px;"><strong>What it does:</strong></p>
+                        <ul style="margin: 5px 0 0 20px;">
+                            <li>Old: <code>{options: ["A", "B"], correctAnswer: 0}</code></li>
+                            <li>New: <code>{answerOptions: [{answer: "A", isCorrect: true}, ...]}</code></li>
+                        </ul>
+                    </div>
+                    <div class="error-message" id="migrationError"></div>
+                    <div class="success-message" id="migrationSuccess"></div>
+                    
+                    <div style="margin: 20px 0;">
+                        <button class="btn" id="analyzeQuestionsBtn">“Å  Analyze Questions</button>
+                        <button class="btn" id="migrateQuestionsBtn" style="display:none; background:#28a745;">Å¡â‚¬ Migrate All Questions</button>
+                    </div>
+
+                    <div id="migrationProgress" style="display:none; margin: 20px 0;">
+                        <div style="background: #e9ecef; height: 30px; border-radius: 8px; overflow: hidden;">
+                            <div id="migrationProgressBar" style="background: #ED1B2E; height: 100%; width: 0%; transition: width 0.3s; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">0%</div>
+                        </div>
+                    </div>
+
+                    <div id="migrationResults" style="background: #f9f9f9; padding: 20px; border-radius: 8px; margin-top: 20px; display: none; white-space: pre-wrap; font-family: monospace; font-size: 14px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Question Modal -->
+    <div class="modal-overlay" id="editQuestionModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Edit Question</h2>
+                <button class="modal-close" id="closeEditQuestionModal">ÃƒÂ¢Ã✅“Ã¢â‚¬“</button>
+            </div>
+            <div class="modal-body">
+                <div class="error-message" id="editQuestionError"></div>
+                <div class="success-message" id="editQuestionSuccess"></div>
+
+                <div id="editRegularForm">
+                    <div class="input-group">
+                        <label for="editQuestionText">Question *</label>
+                        <textarea id="editQuestionText" rows="3" required></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="editQuestionImage">Question Image URL</label>
+                        <input type="url" id="editQuestionImage" placeholder="https://example.com/image.jpg">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Options *</label>
+                        <div id="editOptionsInput"></div>
+                    </div>
+                </div>
+
+                <div id="editSkillsForm" style="display: none;">
+                    <div class="input-group">
+                        <label for="editSkillsQuestionText">Question *</label>
+                        <input type="text" id="editSkillsQuestionText" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="editSkillTag">Skill Tag *</label>
+                        <select id="editSkillTag"></select>
+                    </div>
+                </div>
+
+                <!-- User Selector Section for mapping users as answers -->
+                <div id="editUserSelectorSection" style="display: none;">
+                    <div class="input-group">
+                        <label>Select Users as Correct Answers</label>
+                        <p style="font-size: 0.9em; color: #666; margin-bottom: 10px;">Click on users to select/deselect them as correct answers for this question. Multiple selections allowed.</p>
+                        <div id="editUserSelectorGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; max-height: 400px; overflow-y: auto; padding: 10px; background: #f9f9f9; border-radius: 8px;">
+                            <!-- User cards will be dynamically added here -->
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn" id="saveEditQuestionBtn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit User Modal -->
+    <div class="modal-overlay" id="editUserModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Edit User Profile</h2>
+                <button class="modal-close" id="closeEditUserModal">ÃƒÂ¢Ã✅“Ã¢â‚¬“</button>
+            </div>
+            <div class="modal-body">
+                <div class="error-message" id="editUserError"></div>
+                <div class="success-message" id="editUserSuccess"></div>
+
+                <div class="profile-picture-upload">
+                    <div class="profile-picture-preview" id="editUserProfilePreview">ÃƒÂ°Ã✅Â¸‘Ã‚Â¤</div>
+                    <div class="upload-btn-wrapper">
+                        <button class="upload-btn">Change Photo</button>
+                        <input type="file" id="editUserProfilePicture" accept="image/*">
+                    </div>
+                    <div class="input-group">
+                        <label for="editUserProfileUrl">Or Profile Picture URL</label>
+                        <input type="url" id="editUserProfileUrl" placeholder="https://example.com/photo.jpg">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="editUserName">Display Name *</label>
+                    <input type="text" id="editUserName" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="editUserEmail">Email</label>
+                    <input type="email" id="editUserEmail" disabled>
+                </div>
+
+                <div class="input-group">
+                    <label for="editUserCurrentClient">Current Client *</label>
+                    <input type="text" id="editUserCurrentClient" placeholder="e.g., Vista Equity Partners, Blackstone, etc." required>
+                </div>
+
+                <div class="input-group">
+                    <label for="editUserLocation">Location (LOC) *</label>
+                    <select id="editUserLocation" required>
+                        <option value="">Select location...</option>
+                        <option value="Atlanta">Atlanta</option>
+                        <option value="Boston">Boston</option>
+                        <option value="Charlotte">Charlotte</option>
+                        <option value="Chicago">Chicago</option>
+                        <option value="Cincinnati">Cincinnati</option>
+                        <option value="Dallas">Dallas</option>
+                        <option value="Miami">Miami</option>
+                        <option value="Nashville">Nashville</option>
+                        <option value="New York">New York</option>
+                        <option value="Philadelphia">Philadelphia</option>
+                        <option value="Phoenix">Phoenix</option>
+                        <option value="Seattle">Seattle</option>
+                        <option value="Washington D.C.">Washington D.C.</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="editUserFunFact1">Fun Fact 1</label>
+                    <textarea id="editUserFunFact1" rows="2"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="editUserFunFact2">Fun Fact 2</label>
+                    <textarea id="editUserFunFact2" rows="2"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="editUserFunFact3">Fun Fact 3</label>
+                    <textarea id="editUserFunFact3" rows="2"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label>Skills</label>
+                    <div class="tags-input-container">
+                        <div class="selected-tags" id="editUserSelectedTags"></div>
+                        <input type="text" id="editUserSkillTags" placeholder="Start typing to search skills..." autocomplete="off">
+                        <div class="tags-dropdown" id="editUserTagsDropdown"></div>
+                    </div>
+                </div>
+
+                <button class="btn" id="saveEditUserBtn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="admin.js"></script>
+</body>
+
+</html>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Reset Modal -->
+    <div class="modal-overlay" id="resetPasswordModal">
+        <div class="modal" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2 style="color: #ED1B2E;">Reset User Password</h2>
+                <button class="modal-close" id="closeResetPasswordModal">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="error-message" id="resetPasswordError" style="display: none;"></div>
+                <div class="success-message" id="resetPasswordSuccess" style="display: none;"></div>
+
+                <div class="input-group">
+                    <label for="resetPasswordEmail">User Email *</label>
+                    <input type="email" id="resetPasswordEmail" placeholder="user@sei.com" required>
+                    <span style="display: block; margin-top: 6px; font-size: 13px; color: #6B7280;">Enter the email address of the user</span>
+                </div>
+
+                <div class="input-group">
+                    <label for="resetPasswordNew">Suggested Password (Optional)</label>
+                    <input type="text" id="resetPasswordNew" placeholder="Suggest a new password (min 6 characters)">
+                    <span style="display: block; margin-top: 6px; font-size: 13px; color: #6B7280;">📧 The user will receive a password reset email with a link to set their own password. You can suggest a password here for them to use.</span>
+                </div>
+
+                <div class="input-group">
+                    <label style="display: flex; align-items: flex-start; cursor: pointer;">
+                        <input type="checkbox" id="resetPasswordConfirm" style="margin-right: 8px; margin-top: 2px;">
+                        <span>I understand this will send a password reset email to the user</span>
+                    </label>
+                </div>
+
+                <button class="btn" id="executeResetPasswordBtn">Send Reset Email</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+    #resetPasswordModal.modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+    }
+    #resetPasswordModal.modal-overlay.active {
+        display: flex;
+    }
+    #resetPasswordModal .modal-close {
+        background: none;
+        border: none;
+        font-size: 28px;
+        cursor: pointer;
+        color: #6B7280;
+        padding: 0;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: all 0.3s;
+    }
+    #resetPasswordModal .modal-close:hover {
+        background: #FEE2E2;
+        color: #ED1B2E;
+    }
+    #resetPasswordModal .error-message,
+    #resetPasswordModal .success-message {
+        padding: 14px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        line-height: 1.5;
+        white-space: pre-line;
+    }
+    #resetPasswordModal .error-message {
+        background: #FEE2E2;
+        color: #991B1B;
+        border: 2px solid #FCA5A5;
+    }
+    #resetPasswordModal .success-message {
+        background: #D1FAE5;
+        color: #065F46;
+        border: 2px solid #6EE7B7;
+    }
+    </style>
+
+    <script type="module" src="admin.js"></script>
+</body>
+</html>

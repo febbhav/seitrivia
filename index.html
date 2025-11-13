@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEI Engagement Platform - Know Your Colleagues</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-background"></div>
+
+    <!-- Main Container -->
+    <div class="app-container">
+        
+        <!-- ===================== AUTH SECTION ===================== -->
+        <section class="auth-section" id="authSection">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-logo">
+                        <img src="logo.png" alt="SEI Logo" class="logo-img">
+                        <h1 class="auth-title">SEI Engagement Platform</h1>
+                        <p class="auth-subtitle">Connect, Compete, and Learn About Your Team</p>
+                    </div>
+
+                    <!-- Login Form -->
+                    <div class="auth-form active" id="loginForm">
+                        <h2 class="form-title">Welcome Back!</h2>
+                        
+                        <div class="alert alert-error" id="authError" style="display:none;"></div>
+                        <div class="alert alert-success" id="authSuccess" style="display:none;"></div>
+
+                        <div class="input-group">
+                            <label for="loginEmail">
+                                <span class="input-icon">📧</span>
+                                Email Address
+                            </label>
+                            <input type="email" id="loginEmail" placeholder="your.email@sei.com" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="loginPassword">
+                                <span class="input-icon">🔒</span>
+                                Password
+                            </label>
+                            <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                        </div>
+
+                        <button class="btn btn-primary btn-large" id="loginBtn">
+                            <span>Login</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
+
+                        <div class="auth-links">
+                            <button class="link-btn" id="showResetPasswordBtn">Forgot Password?</button>
+                            <span class="divider">•</span>
+                            <button class="link-btn" id="showSignupBtn">Create Account</button>
+                        </div>
+                    </div>
+
+                    <!-- Signup Form -->
+                    <div class="auth-form" id="signupForm" style="display:none;">
+                        <h2 class="form-title">Join the Team! 🚀</h2>
+                        
+                        <div class="alert alert-error" id="signupError" style="display:none;"></div>
+                        <div class="alert alert-success" id="signupSuccess" style="display:none;"></div>
+
+                        <div class="input-group">
+                            <label for="signupName">
+                                <span class="input-icon">👤</span>
+                                Full Name
+                            </label>
+                            <input type="text" id="signupName" placeholder="John Doe" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="signupEmail">
+                                <span class="input-icon">📧</span>
+                                Email Address
+                            </label>
+                            <input type="email" id="signupEmail" placeholder="your.email@sei.com" required>
+                            <span class="input-help">Must be a valid @sei.com email</span>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="signupPassword">
+                                <span class="input-icon">🔒</span>
+                                Password
+                            </label>
+                            <input type="password" id="signupPassword" placeholder="Create a strong password" required>
+                            <span class="input-help">Minimum 6 characters</span>
+                        </div>
+
+                        <button class="btn btn-primary btn-large" id="signupBtn">
+                            <span>Create Account</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
+
+                        <div class="auth-links">
+                            <button class="link-btn" id="backToLoginFromSignup">← Back to Login</button>
+                        </div>
+                    </div>
+
+                    <!-- Reset Password Form -->
+                    <div class="auth-form" id="resetForm" style="display:none;">
+                        <h2 class="form-title">Reset Password 🔑</h2>
+                        <p class="form-description">Enter your email to receive a password reset link</p>
+                        
+                        <div class="alert alert-error" id="resetError" style="display:none;"></div>
+                        <div class="alert alert-success" id="resetSuccess" style="display:none;"></div>
+
+                        <div class="input-group">
+                            <label for="resetEmail">
+                                <span class="input-icon">📧</span>
+                                Email Address
+                            </label>
+                            <input type="email" id="resetEmail" placeholder="your.email@sei.com" required>
+                        </div>
+
+                        <button class="btn btn-primary btn-large" id="resetPasswordBtn">
+                            <span>Send Reset Link</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
+
+                        <div class="auth-links">
+                            <button class="link-btn" id="backToLoginBtn">← Back to Login</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== MAIN APP SECTION ===================== -->
+        <section class="main-app" id="mainApp" style="display:none;">
+            
+            <!-- Header -->
+            <header class="app-header">
+                <div class="header-left">
+                    <img src="logo.png" alt="SEI Logo" class="header-logo">
+                    <div class="header-title">
+                        <h1>SEI Engagement Platform</h1>
+                        <p id="welcomeMessage">Welcome back!</p>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <!-- User Info with Large Avatar -->
+                    <div class="header-user-info">
+                        <div class="header-avatar-large" id="headerAvatar">
+                            <div class="avatar-placeholder">👤</div>
+                        </div>
+                        <div class="header-user-details">
+                            <div class="header-username" id="headerUsername">User</div>
+                            <div class="user-stats-mini" id="userStats">
+                                <div class="stat-mini">
+                                    <span class="stat-icon">⭐</span>
+                                    <span class="stat-value" id="headerScore">0</span>
+                                </div>
+                                <div class="stat-mini">
+                                    <span class="stat-icon">🏆</span>
+                                    <span class="stat-value" id="headerRank">#-</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary btn-small" id="logoutBtn">
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Navigation -->
+            <nav class="app-nav">
+                <button class="nav-item active" id="navGame">
+                    <span class="nav-icon">🎮</span>
+                    <span>Play Trivia</span>
+                </button>
+                <button class="nav-item" id="navBrowse">
+                    <span class="nav-icon">👥</span>
+                    <span>Browse Team</span>
+                </button>
+                <button class="nav-item" id="navLeaderboard">
+                    <span class="nav-icon">🏆</span>
+                    <span>Leaderboard</span>
+                </button>
+                <button class="nav-item" id="navProfile">
+                    <span class="nav-icon">👤</span>
+                    <span>My Profile</span>
+                </button>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="app-main">
+
+                <!-- ===================== GAME TAB ===================== -->
+                <div class="tab-content active" id="gameTab">
+                    
+                    <!-- Question Card -->
+                    <div class="question-container">
+                        <div class="alert alert-error" id="gameError" style="display:none;"></div>
+                        <div class="alert alert-success" id="gameSuccess" style="display:none;"></div>
+
+                        <div class="question-card" id="questionCard">
+                            <div class="question-header">
+                                <div class="question-meta">
+                                    <span class="question-number" id="questionNumber">Question 1</span>
+                                    <span class="question-type" id="questionType">Single Answer</span>
+                                </div>
+                                <div class="question-instruction" id="questionInstruction" style="display:none;">
+                                    Select <span id="correctAnswerCount">2</span> correct answers
+                                </div>
+                                <div class="question-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="question-body">
+                                <h2 class="question-text" id="questionText">Loading question...</h2>
+                                
+                                <!-- Question Images (for "Who is this?" type questions) -->
+                                <div class="question-images" id="questionImages" style="display:none;"></div>
+
+                                <!-- Options Container -->
+                                <div class="options-container" id="optionsContainer"></div>
+                            </div>
+
+                            <div class="question-actions">
+                                <button class="btn btn-primary btn-large" id="submitAnswerBtn" disabled>
+                                    <span>Submit Answer</span>
+                                    <span class="btn-arrow">→</span>
+                                </button>
+                                <button class="btn btn-secondary btn-large" id="nextQuestionBtn" style="display:none;">
+                                    <span>Next Question</span>
+                                    <span class="btn-arrow">→</span>
+                                </button>
+                            </div>
+
+                            <!-- Answer Feedback -->
+                            <div class="answer-feedback" id="answerFeedback" style="display:none;">
+                                <div class="feedback-icon" id="feedbackIcon"></div>
+                                <div class="feedback-text" id="feedbackText"></div>
+                                <div class="feedback-score" id="feedbackScore"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===================== BROWSE TAB ===================== -->
+                <div class="tab-content" id="browseTab" style="display:none;">
+                    <div class="browse-header">
+                        <div class="browse-title">
+                            <h2>SEI Team Directory</h2>
+                            <p>Get to know your colleagues across all offices</p>
+                        </div>
+                        
+                        <!-- Search and Filter -->
+                        <div class="browse-controls">
+                            <div class="search-box">
+                                <span class="search-icon">🔍</span>
+                                <input type="text" id="teamSearch" placeholder="Search by name, location, client, or skills...">
+                            </div>
+                            <div class="filter-controls">
+                                <select id="locationFilter" class="filter-select">
+                                    <option value="">All Locations</option>
+                                    <option value="Atlanta">Atlanta</option>
+                                    <option value="Boston">Boston</option>
+                                    <option value="Charlotte">Charlotte</option>
+                                    <option value="Chicago">Chicago</option>
+                                    <option value="Cincinnati">Cincinnati</option>
+                                    <option value="Dallas">Dallas</option>
+                                    <option value="Miami">Miami</option>
+                                    <option value="Nashville">Nashville</option>
+                                    <option value="New York">New York</option>
+                                    <option value="Philadelphia">Philadelphia</option>
+                                    <option value="Phoenix">Phoenix</option>
+                                    <option value="Seattle">Seattle</option>
+                                    <option value="Washington D.C.">Washington D.C.</option>
+                                </select>
+                                <select id="skillFilter" class="filter-select">
+                                    <option value="">All Skills</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Team Table -->
+                    <div class="team-table-container">
+                        <table class="team-table" id="teamTable">
+                            <thead>
+                                <tr>
+                                    <th class="col-avatar"></th>
+                                    <th class="col-name">Name</th>
+                                    <th class="col-location">Location</th>
+                                    <th class="col-client">Current Client</th>
+                                    <th class="col-skills">Skills</th>
+                                </tr>
+                            </thead>
+                            <tbody id="teamTableBody">
+                                <!-- Rows will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                        <div class="table-empty" id="tableEmpty" style="display:none;">
+                            <div class="empty-icon">🔍</div>
+                            <div class="empty-text">No team members found</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===================== LEADERBOARD TAB ===================== -->
+                <div class="tab-content" id="leaderboardTab" style="display:none;">
+                    <div class="leaderboard-header">
+                        <h2>🏆 Top Players</h2>
+                        <p>See who's leading the pack</p>
+                    </div>
+
+                    <div class="leaderboard-container">
+                        <!-- Top 3 Podium -->
+                        <div class="podium" id="podium">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+
+                        <!-- Rest of Leaderboard -->
+                        <div class="leaderboard-list" id="leaderboardList">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===================== PROFILE TAB ===================== -->
+                <div class="tab-content" id="profileTab" style="display:none;">
+                    <div class="profile-container">
+                        <div class="profile-header-section">
+                            <div class="profile-avatar-section">
+                                <!-- Large Profile Picture -->
+                                <div class="profile-avatar-large" id="profilePicturePreview">
+                                    <div class="avatar-placeholder">👤</div>
+                                </div>
+                                <div class="profile-avatar-actions">
+                                    <input type="file" id="profilePictureInput" accept="image/*" style="display:none;">
+                                    <button class="btn btn-secondary" id="uploadPhotoBtn">
+                                        <span>📸 Change Photo</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-stats-section">
+                                <div class="profile-stat">
+                                    <div class="profile-stat-icon">⭐</div>
+                                    <div class="profile-stat-content">
+                                        <div class="profile-stat-value" id="profileScore">0</div>
+                                        <div class="profile-stat-label">Total Score</div>
+                                    </div>
+                                </div>
+                                <div class="profile-stat">
+                                    <div class="profile-stat-icon">🏆</div>
+                                    <div class="profile-stat-content">
+                                        <div class="profile-stat-value" id="profileRank">#-</div>
+                                        <div class="profile-stat-label">Leaderboard Rank</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="profile-form-section">
+                            <h2>Profile Information</h2>
+                            <div class="alert alert-error" id="profileError" style="display:none;"></div>
+                            <div class="alert alert-success" id="profileSuccess" style="display:none;"></div>
+
+                            <form id="profileForm">
+                                <div class="input-group">
+                                    <label for="profileName">
+                                        <span class="input-icon">👤</span>
+                                        Display Name *
+                                    </label>
+                                    <input type="text" id="profileName" required>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="profileClient">
+                                        <span class="input-icon">💼</span>
+                                        Current Client *
+                                    </label>
+                                    <input type="text" id="profileClient" placeholder="e.g., Goldman Sachs, Internal, Unassigned" required>
+                                    <span class="input-help">Which client are you currently working with?</span>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="profileLocation">
+                                        <span class="input-icon">📍</span>
+                                        Location *
+                                    </label>
+                                    <select id="profileLocation" required>
+                                        <option value="">Select location...</option>
+                                        <option value="Atlanta">Atlanta</option>
+                                        <option value="Boston">Boston</option>
+                                        <option value="Charlotte">Charlotte</option>
+                                        <option value="Chicago">Chicago</option>
+                                        <option value="Cincinnati">Cincinnati</option>
+                                        <option value="Dallas">Dallas</option>
+                                        <option value="Miami">Miami</option>
+                                        <option value="Nashville">Nashville</option>
+                                        <option value="New York">New York</option>
+                                        <option value="Philadelphia">Philadelphia</option>
+                                        <option value="Phoenix">Phoenix</option>
+                                        <option value="Seattle">Seattle</option>
+                                        <option value="Washington D.C.">Washington D.C.</option>
+                                    </select>
+                                    <span class="input-help">Which SEI office are you based out of?</span>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="profileFunFact1">
+                                        <span class="input-icon">💡</span>
+                                        Fun Fact 1
+                                    </label>
+                                    <textarea id="profileFunFact1" rows="3" placeholder="Share something interesting about yourself..."></textarea>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="profileFunFact2">
+                                        <span class="input-icon">💡</span>
+                                        Fun Fact 2
+                                    </label>
+                                    <textarea id="profileFunFact2" rows="3" placeholder="Another fun fact..."></textarea>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="profileFunFact3">
+                                        <span class="input-icon">💡</span>
+                                        Fun Fact 3
+                                    </label>
+                                    <textarea id="profileFunFact3" rows="3" placeholder="One more fun fact..."></textarea>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="profileSkills">
+                                        <span class="input-icon">🎯</span>
+                                        Skills & Expertise *
+                                    </label>
+                                    <div class="tags-input-container">
+                                        <div class="selected-tags" id="selectedTags"></div>
+                                        <input type="text" id="profileSkills" placeholder="Start typing to search skills..." autocomplete="off">
+                                        <div class="tags-dropdown" id="tagsDropdown" style="display:none;"></div>
+                                    </div>
+                                    <span class="input-help">Add tags for your skill set</span>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-large">
+                                    <span>Save Profile</span>
+                                    <span class="btn-arrow">✓</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </section>
+    </div>
+
+    <!-- Profile Setup Modal (for first-time users) -->
+    <div class="modal-overlay" id="profileModal" style="display:none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>✨ Complete Your Profile</h2>
+                <p>Let's get you set up!</p>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-error" id="modalError" style="display:none;"></div>
+                
+                <div class="profile-picture-section">
+                    <div class="profile-picture-preview" id="modalProfilePicturePreview">
+                        <div class="profile-picture-placeholder">👤</div>
+                    </div>
+                    <div class="profile-picture-upload">
+                        <input type="file" id="modalProfilePictureInput" accept="image/*" style="display:none;">
+                        <button class="btn btn-secondary" id="modalUploadPhotoBtn">
+                            <span>📸 Upload Photo</span>
+                        </button>
+                    </div>
+                </div>
+
+                <form id="modalProfileForm">
+                    <div class="input-group">
+                        <label for="modalProfileName">Display Name *</label>
+                        <input type="text" id="modalProfileName" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="modalProfileClient">Current Client *</label>
+                        <input type="text" id="modalProfileClient" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="modalProfileLocation">Location *</label>
+                        <select id="modalProfileLocation" required>
+                            <option value="">Select location...</option>
+                            <option value="Atlanta">Atlanta</option>
+                            <option value="Boston">Boston</option>
+                            <option value="Charlotte">Charlotte</option>
+                            <option value="Chicago">Chicago</option>
+                            <option value="Cincinnati">Cincinnati</option>
+                            <option value="Dallas">Dallas</option>
+                            <option value="Miami">Miami</option>
+                            <option value="Nashville">Nashville</option>
+                            <option value="New York">New York</option>
+                            <option value="Philadelphia">Philadelphia</option>
+                            <option value="Phoenix">Phoenix</option>
+                            <option value="Seattle">Seattle</option>
+                            <option value="Washington D.C.">Washington D.C.</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="modalProfileSkills">Skills *</label>
+                        <div class="tags-input-container">
+                            <div class="selected-tags" id="modalSelectedTags"></div>
+                            <input type="text" id="modalProfileSkills" placeholder="Start typing..." autocomplete="off">
+                            <div class="tags-dropdown" id="modalTagsDropdown" style="display:none;"></div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-large">
+                        <span>Complete Setup</span>
+                        <span class="btn-arrow">→</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confetti Container -->
+    <div class="confetti-container" id="confettiContainer"></div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
